@@ -1,4 +1,4 @@
-EXEC = ../../exec/tempdrop_sonde.x
+EXEC = ${EXECpath}/tempdrop_sonde.x
 
 MODS = kinds_interface.o \
        namelist_interface.o \
@@ -17,9 +17,8 @@ SUBS =
 
 OBJS = $(MODS) $(SUBS) main.o
 
-INC = -I${UTILS_INC} ${NETCDF_INCLUDE} ${HDF5_INCLUDE}
-LIBS = -L${UTILS_LIBDIR} -lslatec -lsondelib -lspline ${BUFR_LDFLAGS} \
-       ${NETCDF_LDFLAGS} ${HDF5_LDFLAGS} ${Z_LIB}
+INC = ${NETCDF_INCLUDE}
+LIBS = -L${DEPLIBS_PATH}/lib -lslatec -lsondelib -lspline ${NETCDF_LDFLAGS}
 FFLAGS += $(INC)
 
 $(EXEC): main.F90 $(MODS) $(SUBS)
@@ -30,7 +29,7 @@ $(EXEC): main.F90 $(MODS) $(SUBS)
 .SUFFIXES: .F90 .o
 
 clean:
-	rm *.o *.mod
+	rm $(MODS) $(SUBS) *.mod
 
 .F90.o:
 	${FC} $(FFLAGS) -c $*.F90

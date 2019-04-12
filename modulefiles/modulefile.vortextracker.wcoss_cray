@@ -1,5 +1,5 @@
 #%Module#####################################################
-## Module file for vortextracker
+## Module file for utils
 #############################################################
 module load craype-network-aries
 module load craype-haswell
