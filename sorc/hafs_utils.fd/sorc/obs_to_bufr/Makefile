@@ -1,4 +1,4 @@
-EXEC = ${EXECpath}/obs_to_bufr.x
+EXEC = ../../exec/obs_to_bufr.x
 
 MODS = kinds_interface.o \
        constants_interface.o \
@@ -20,8 +20,9 @@ SUBS =
 
 OBJS = $(MODS) $(SUBS) main.o
 
-INC = -I${DEPLIBS_PATH}/include ${NETCDF_INCLUDE}
-LIBS = -L${DEPLIBS_PATH}/lib -lfson -lslatec -lslint -lspline ${NETCDF_LDFLAGS} ${BUFR_LDFLAGS}
+INC = -I${UTILS_INC} ${NETCDF_INCLUDE} ${HDF5_INCLUDE}
+LIBS = -L${UTILS_LIBDIR} -lfson -lslatec -lslint -lspline ${BUFR_LDFLAGS} \
+       ${NETCDF_LDFLAGS} ${HDF5_LDFLAGS} ${Z_LIB}
 FFLAGS += $(INC)
 
 $(EXEC): main.F90 $(MODS) $(SUBS)
@@ -32,7 +33,7 @@ $(EXEC): main.F90 $(MODS) $(SUBS)
 .SUFFIXES: .F90 .o
 
 clean:
-	rm $(MODS) $(SUBS) *.mod
+	rm *.o *.mod
 
 .F90.o:
 	${FC} $(FFLAGS) -c $*.F90

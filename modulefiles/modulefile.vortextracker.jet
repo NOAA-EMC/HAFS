@@ -1,5 +1,5 @@
 #%Module#####################################################
-## Module file for utils
+## Module file for vortextracker
 #############################################################
 #
 setenv COREPATH /mnt/lfs3/projects/hfv3gfs/gwv/ljtjet/lib

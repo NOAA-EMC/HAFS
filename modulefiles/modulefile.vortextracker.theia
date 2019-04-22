@@ -1,5 +1,5 @@
 #%Module#####################################################
-## Module file for utils
+## Module file for vortextracker
 #############################################################
 
 module use /scratch3/NCEPDEV/nwprod/lib/modulefiles
