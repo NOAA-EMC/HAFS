@@ -52,15 +52,10 @@ export PARMhafs=${PARMhafs:-${HOMEhafs}/parm}
 export EXEChafs=${EXEChafs:-${HOMEhafs}/exec}
 export FIXhafs=${FIXhafs:-${HOMEhafs}/fix}
 
-export HOMEgfs=${HOMEgfs:-/gpfs/hps3/emc/hwrf/noscrub/${USER}/save/HAFS/fv3gfs}
-export EXECgfs=${EXECgfs:-${HOMEgfs}/exec}
-export FIXgfs=${FIXgfs:-${HOMEgfs}/fix}
-export USHgfs=${USHfv3:-${HOMEgfs}/ush}
-
 export FIXam=${FIXhafs}/fix_am
 export FIXorog=${FIXhafs}/fix_orog
-
 export FIXfv3=${FIXhafs}/fix_fv3
+export FIXsfc_climo=${FIXhafs}/fix_sfc_climo
 
 export MAKEHGRIDEXEC=${EXEChafs}/hafs_make_hgrid.x
 export MAKEMOSAICEXEC=${EXEChafs}/hafs_make_solo_mosaic.x
@@ -68,6 +63,7 @@ export FILTERTOPOEXEC=${EXEChafs}/hafs_filter_topo.x
 export FREGRIDEXEC=${EXEChafs}/hafs_fregrid.x
 export OROGEXEC=${EXEChafs}/hafs_orog.x
 export SHAVEEXEC=${EXEChafs}/hafs_shave.x
+export SFCCLIMOEXEC=${EXEChafs}/hafs_sfc_climo_gen.x
 
 export MAKEGRIDSSH=${USHhafs}/hafs_make_grid.sh
 export MAKEOROGSSH=${USHhafs}/hafs_make_orog.sh

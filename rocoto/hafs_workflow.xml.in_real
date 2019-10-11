@@ -239,17 +239,21 @@
   </task> 
 
 @** if gtype==regional
-  <task name="chgres_bc" maxtries="&MAX_TRIES;">
+<metatask name="chgres_bc">
+  <var name="group">001 002 003 004 005 006</var>
+  <task name="chgres_bc#group#" maxtries="&MAX_TRIES;">
     <command>&JOBhafs;/JHAFS_CHGRES_BC</command>
-    <jobname>hafs_chgres_bc_&SID;_<cyclestr>@Y@m@d@H</cyclestr></jobname>
+    <jobname>hafs_chgres_bc#group#_&SID;_<cyclestr>@Y@m@d@H</cyclestr></jobname>
+    <join><cyclestr>&WORKhafs;/hafs_chgres_bc#group#.log</cyclestr></join>
     <account>&ACCOUNT;</account>
     &RESERVATION;
     <queue>&QUEUE_PE;</queue>
     &PE_EXTRA;
     &NODES_EXTRA;
     &ENV_VARS;
-	&CHGRES_BC_RESOURCES;
-    <join><cyclestr>&WORKhafs;/hafs_chgres_bc.log</cyclestr></join>
+    &CHGRES_BC_RESOURCES;
+    <envar><name>BC_GROUPN</name><value>6</value></envar>
+    <envar><name>BC_GROUPI</name><value>#group#</value></envar>
 
     <dependency>
       <and>
@@ -268,6 +272,7 @@
       </and>
     </dependency>
   </task> 
+</metatask>
 @** endif
 
   <task name="forecast" maxtries="&MAX_TRIES;">
@@ -286,7 +291,7 @@
       <and>
         <taskdep task="chgres_ic"/>
         <or>
-          <taskdep task="chgres_bc"/>
+          <metataskdep metatask="chgres_bc"/>
           <strneq><left>&gtype;</left><right>regional</right></strneq>
         </or>
       </and>

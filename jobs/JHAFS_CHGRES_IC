@@ -36,17 +36,7 @@ export PARMhafs=${PARMhafs:-${HOMEhafs}/parm}
 export EXEChafs=${EXEChafs:-${HOMEhafs}/exec}
 export FIXhafs=${FIXhafs:-${HOMEhafs}/fix}
 
-export HOMEgfs=${HOMEgfs:-/gpfs/hps3/emc/hwrf/noscrub/${USER}/save/HAFS/fv3gfs}
-export EXECgfs=${EXECgfs:-${HOMEgfs}/exec}
-export FIXgfs=${FIXgfs:-${HOMEgfs}/fix}
-export USHgfs=${USHfv3:-${HOMEgfs}/ush}
-
-export FIXam=${FIXhafs}/fix_am
-#export FIXfv3=${FIXhafs}/fix_fv3
-export FIXfv3=${WORKhafs}/intercom/grid
-
-export CHGRESEXEC=${EXEChafs}/hafs_chgres.x
-export CHGRESSH=${USHhafs}/hafs_chgres.sh
+export CHGRESCUBEEXEC=${EXEChafs}/hafs_chgres_cube.x
 
 ####################################
 # Load Modules if Needed
@@ -106,7 +96,6 @@ else
   export BACKGROUND=""
 fi
 
-
 env
 
 ####################################
@@ -121,17 +110,16 @@ export PDY=${PDY:-${PDYtmp}}
 #####################################
 # Working directories
 #####################################
-export INPdir=${INPdir:-${WORKhafs}/intercom/chgres}
-export OUTDIR=${OUTDIR:-${WORKhafs}/chgres_ic/out}
-export DATA=${WORKhafs}/chgres_ic/work
+export OUTDIR=${OUTDIR:-${WORKhafs}/intercom/chgres}
+export DATA=${WORKhafs}/chgres_ic
 
 export SCRUBDATA=${SCRUBDATA:-YES}
 
 if [ "${SCRUBDATA}" = YES ]; then
-  rm -rf $DATA $OUTDIR 
+  rm -rf $DATA
 fi
 
-mkdir -p $INPdir $OUTDIR $DATA
+mkdir -p $OUTDIR $DATA
 cd $DATA
 
 #####################################
@@ -148,12 +136,6 @@ export INIDIR=${COMgfs}/gfs.$PDY/$cyc
 if [ $gtype = regional ] ; then
   export REGIONAL=1
   export HALO=4
-#
-# set the links to use the 4 halo grid and orog files
-# these are necessary for creating the boundary data
-#
-  ln -sf $FIXfv3/$CASE/${CASE}_grid.tile7.halo4.nc $FIXfv3/$CASE/${CASE}_grid.tile7.nc
-  ln -sf $FIXfv3/$CASE/${CASE}_oro_data.tile7.halo4.nc $FIXfv3/$CASE/${CASE}_oro_data.tile7.nc
 else
 #
 # for gtype = uniform, stretch, or nest
@@ -163,11 +145,8 @@ fi
 
 #####################################
 # Execute the script.
-${HOMEhafs}/scripts/exhafs_chgres.sh
+${HOMEhafs}/scripts/exhafs_chgres_ic.sh
 export err=$?
 #####################################
-
-mv $OUTDIR/gfs*nc $INPdir/.
-mv $OUTDIR/sfc*nc $INPdir/.
 
 exit $err
