@@ -4,9 +4,9 @@
 
   <!-- Set some variables for use later: -->
 
-  <!ENTITY COM_SCRUB_TIME "1800">
-  <!ENTITY WORK_SCRUB_TIME "1200">
-  <!ENTITY CYCLE_THROTTLE "4">
+  <!ENTITY COM_SCRUB_TIME "21600">
+  <!ENTITY WORK_SCRUB_TIME "10800">
+  <!ENTITY CYCLE_THROTTLE "7">
   <!ENTITY TASK_THROTTLE "40">
 
   <!-- Maximum number of times to try various jobs -->
@@ -55,8 +55,8 @@
   <!ENTITY COMgfs   "@[COMgfs:-&WORKhafs;/hafsdata]">
 
   <!-- The output conf file for each cycle: -->
-  <!ENTITY CONFhafs "@[CONFhafs:-&COMhafs;/&STORMLABEL;.conf]">
-  <!ENTITY HOLDVARS "@[HOLDVARS:-&COMhafs;/&STORMLABEL;.holdvars.txt]">
+  <!ENTITY CONFhafs "&COMhafs;/&STORMLABEL;.conf">
+  <!ENTITY HOLDVARS "&COMhafs;/&STORMLABEL;.holdvars.txt">
 
   <!-- Enabling or disabling  parts of the workflow: -->
   <!ENTITY FETCH_INPUT "@[FETCH_INPUT]">
@@ -321,7 +321,7 @@
     <account>&ACCOUNT;</account>
     &RESERVATION;
     <queue>&QUEUE_PE;</queue>
-    &SHARED_EXTRA;
+    &PE_EXTRA;
     &CORES_EXTRA;
     &ENV_VARS;
     &PRODUCT_RESOURCES;
