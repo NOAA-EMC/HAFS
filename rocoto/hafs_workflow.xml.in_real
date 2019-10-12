@@ -290,10 +290,9 @@
     <dependency>
       <and>
         <taskdep task="chgres_ic"/>
-        <or>
-          <metataskdep metatask="chgres_bc"/>
-          <strneq><left>&gtype;</left><right>regional</right></strneq>
-        </or>
+@** if gtype==regional
+	<metataskdep metatask="chgres_bc"/>
+@** endif
       </and>
     </dependency>
   </task>
