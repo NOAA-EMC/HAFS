@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/ksh
 
 set -xe
 
@@ -316,6 +316,7 @@ cp $grid_dir/${CASE}_*mosaic.nc $out_dir/
 # tasks.  All other configurations must be run with a
 # MULTIPLE OF SIX MPI TASKS.
 
+date
 input_sfc_climo_dir=${FIXhafs}/fix_sfc_climo
 sfc_climo_workdir=$DATA/sfc_climo
 sfc_climo_savedir=$out_dir/fix_sfc
