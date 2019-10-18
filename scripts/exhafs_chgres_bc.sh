@@ -151,6 +151,8 @@ if [ $input_type = "grib2" ]; then
     ${WGRIB2} ${grib2_file_input_grid} -inv ./chgres.inv
   fi
   INPDIR="./"
+else
+  INPDIR=${INIDIR}
 fi
 
 if [ $gtype = regional ]; then
