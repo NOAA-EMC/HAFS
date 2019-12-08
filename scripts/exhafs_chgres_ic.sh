@@ -53,7 +53,8 @@ if [ $ictype = "gfsnemsio" ]; then
   sfc_files_input_grid=${CDUMP}.t${cyc}z.sfcanl.nemsio
   grib2_file_input_grid=""
   input_type="gaussian"
-  base_install_dir="${HOMEhafs}/sorc/hafs_utils.fd"
+  varmap_file=""
+  fixed_files_dir_input_grid=""
   tracers='"sphum","liq_wat","o3mr","ice_wat","rainwat","snowwat","graupel"'
   tracers_input='"spfh","clwmr","o3mr","icmr","rwmr","snmr","grle"'
 # Use gfs master grib2 files
@@ -62,7 +63,8 @@ elif [ $ictype = "gfsgrib2_master" ]; then
   sfc_files_input_grid=${CDUMP}.t${cyc}z.master.pgrb2f${FHR3}
   grib2_file_input_grid=${CDUMP}.t${cyc}z.master.pgrb2f${FHR3}
   input_type="grib2"
-  base_install_dir="${HOMEhafs}/sorc/hafs_utils.fd"
+  varmap_file="${HOMEhafs}/sorc/hafs_utils.fd/parm/varmap_tables/FV3GFSphys_var_map.txt"
+  fixed_files_dir_input_grid="${HOMEhafs}/sorc/hafs_utils.fd/fix/fix_chgres"
   tracers='"sphum","liq_wat","o3mr"'
   tracers_input='"spfh","clwmr","o3mr"'
 # Use gfs 0.25 degree grib2 files
@@ -71,7 +73,8 @@ elif [ $ictype = "gfsgrib2_0p25" ]; then
   sfc_files_input_grid=${CDUMP}.t${cyc}z.pgrb2.0p25.f${FHR3}
   grib2_file_input_grid=${CDUMP}.t${cyc}z.pgrb2.0p25.f${FHR3}
   input_type="grib2"
-  base_install_dir="${HOMEhafs}/sorc/hafs_utils.fd"
+  varmap_file="${HOMEhafs}/sorc/hafs_utils.fd/parm/varmap_tables/FV3GFSphys_var_map.txt"
+  fixed_files_dir_input_grid="${HOMEhafs}/sorc/hafs_utils.fd/fix/fix_chgres"
   tracers='"sphum","liq_wat","o3mr"'
   tracers_input='"spfh","clwmr","o3mr"'
 # Use gfs 0.25 degree grib2 a and b files
@@ -80,7 +83,8 @@ elif [ $ictype = "gfsgrib2ab_0p25" ]; then
   sfc_files_input_grid=${CDUMP}.t${cyc}z.pgrb2.0p25.f${FHR3}
   grib2_file_input_grid=${CDUMP}.t${cyc}z.pgrb2ab.0p25.f${FHR3}
   input_type="grib2"
-  base_install_dir="${HOMEhafs}/sorc/hafs_utils.fd"
+  varmap_file="${HOMEhafs}/sorc/hafs_utils.fd/parm/varmap_tables/FV3GFSphys_var_map.txt"
+  fixed_files_dir_input_grid="${HOMEhafs}/sorc/hafs_utils.fd/fix/fix_chgres"
   tracers='"sphum","liq_wat","o3mr"'
   tracers_input='"spfh","clwmr","o3mr"'
 # Use gfs 0.50 degree grib2 files
@@ -89,7 +93,8 @@ elif [ $ictype = "gfsgrib2_0p50" ]; then
   sfc_files_input_grid=${CDUMP}.t${cyc}z.pgrb2.0p50.f${FHR3}
   grib2_file_input_grid=${CDUMP}.t${cyc}z.pgrb2.0p50.f${FHR3}
   input_type="grib2"
-  base_install_dir="${HOMEhafs}/sorc/hafs_utils.fd"
+  varmap_file="${HOMEhafs}/sorc/hafs_utils.fd/parm/varmap_tables/FV3GFSphys_var_map.txt"
+  fixed_files_dir_input_grid="${HOMEhafs}/sorc/hafs_utils.fd/fix/fix_chgres"
   tracers='"sphum","liq_wat","o3mr"'
   tracers_input='"spfh","clwmr","o3mr"'
 # Use gfs 1.00 degree grib2 files
@@ -98,7 +103,8 @@ elif [ $ictype = "gfsgrib2_1p00" ]; then
   sfc_files_input_grid=${CDUMP}.t${cyc}z.pgrb2.1p00.f${FHR3}
   grib2_file_input_grid=${CDUMP}.t${cyc}z.pgrb2.1p00.f${FHR3}
   input_type="grib2"
-  base_install_dir="${HOMEhafs}/sorc/hafs_utils.fd"
+  varmap_file="${HOMEhafs}/sorc/hafs_utils.fd/parm/varmap_tables/FV3GFSphys_var_map.txt"
+  fixed_files_dir_input_grid="${HOMEhafs}/sorc/hafs_utils.fd/fix/fix_chgres"
   tracers='"sphum","liq_wat","o3mr"'
   tracers_input='"spfh","clwmr","o3mr"'
 else
@@ -177,6 +183,8 @@ cat>./fort.41<<EOF
  data_dir_input_grid="${INIDIR}"
  atm_files_input_grid="${atm_files_input_grid}"
  sfc_files_input_grid="${sfc_files_input_grid}"
+ varmap_file="${varmap_file}"
+ fixed_files_dir_input_grid="${fixed_files_dir_input_grid}"
  cycle_mon=$month
  cycle_day=$day
  cycle_hour=$hour

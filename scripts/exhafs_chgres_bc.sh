@@ -73,7 +73,8 @@ if [ $bctype = "gfsnemsio" ]; then
   sfc_files_input_grid=${CDUMP}.t${cyc}z.sfcanl.nemsio
   grib2_file_input_grid=""
   input_type="gaussian"
-  base_install_dir="${HOMEhafs}/sorc/hafs_utils.fd"
+  varmap_file=""
+  fixed_files_dir_input_grid=""
   tracers='"sphum","liq_wat","o3mr","ice_wat","rainwat","snowwat","graupel"'
   tracers_input='"spfh","clwmr","o3mr","icmr","rwmr","snmr","grle"'
 # Use gfs master grib2 files
@@ -82,7 +83,8 @@ elif [ $bctype = "gfsgrib2_master" ]; then
   sfc_files_input_grid=${CDUMP}.t${cyc}z.master.pgrb2f${FHR3}
   grib2_file_input_grid=${CDUMP}.t${cyc}z.master.pgrb2f${FHR3}
   input_type="grib2"
-  base_install_dir="${HOMEhafs}/sorc/hafs_utils.fd"
+  varmap_file="${HOMEhafs}/sorc/hafs_utils.fd/parm/varmap_tables/FV3GFSphys_var_map.txt"
+  fixed_files_dir_input_grid="${HOMEhafs}/sorc/hafs_utils.fd/fix/fix_chgres"
   tracers='"sphum","liq_wat","o3mr"'
   tracers_input='"spfh","clwmr","o3mr"'
 # Use gfs 0.25 degree grib2 files
@@ -91,7 +93,8 @@ elif [ $bctype = "gfsgrib2_0p25" ]; then
   sfc_files_input_grid=${CDUMP}.t${cyc}z.pgrb2.0p25.f${FHR3}
   grib2_file_input_grid=${CDUMP}.t${cyc}z.pgrb2.0p25.f${FHR3}
   input_type="grib2"
-  base_install_dir="${HOMEhafs}/sorc/hafs_utils.fd"
+  varmap_file="${HOMEhafs}/sorc/hafs_utils.fd/parm/varmap_tables/FV3GFSphys_var_map.txt"
+  fixed_files_dir_input_grid="${HOMEhafs}/sorc/hafs_utils.fd/fix/fix_chgres"
   tracers='"sphum","liq_wat","o3mr"'
   tracers_input='"spfh","clwmr","o3mr"'
 # Use gfs 0.25 degree grib2 a and b files
@@ -100,7 +103,8 @@ elif [ $bctype = "gfsgrib2ab_0p25" ]; then
   sfc_files_input_grid=${CDUMP}.t${cyc}z.pgrb2.0p25.f${FHR3}
   grib2_file_input_grid=${CDUMP}.t${cyc}z.pgrb2ab.0p25.f${FHR3}
   input_type="grib2"
-  base_install_dir="${HOMEhafs}/sorc/hafs_utils.fd"
+  varmap_file="${HOMEhafs}/sorc/hafs_utils.fd/parm/varmap_tables/FV3GFSphys_var_map.txt"
+  fixed_files_dir_input_grid="${HOMEhafs}/sorc/hafs_utils.fd/fix/fix_chgres"
   tracers='"sphum","liq_wat","o3mr"'
   tracers_input='"spfh","clwmr","o3mr"'
 # Use gfs 0.50 degree grib2 files
@@ -109,7 +113,8 @@ elif [ $bctype = "gfsgrib2_0p50" ]; then
   sfc_files_input_grid=${CDUMP}.t${cyc}z.pgrb2.0p50.f${FHR3}
   grib2_file_input_grid=${CDUMP}.t${cyc}z.pgrb2.0p50.f${FHR3}
   input_type="grib2"
-  base_install_dir="${HOMEhafs}/sorc/hafs_utils.fd"
+  varmap_file="${HOMEhafs}/sorc/hafs_utils.fd/parm/varmap_tables/FV3GFSphys_var_map.txt"
+  fixed_files_dir_input_grid="${HOMEhafs}/sorc/hafs_utils.fd/fix/fix_chgres"
   tracers='"sphum","liq_wat","o3mr"'
   tracers_input='"spfh","clwmr","o3mr"'
 # Use gfs 1.00 degree grib2 files
@@ -118,7 +123,8 @@ elif [ $bctype = "gfsgrib2_1p00" ]; then
   sfc_files_input_grid=${CDUMP}.t${cyc}z.pgrb2.1p00.f${FHR3}
   grib2_file_input_grid=${CDUMP}.t${cyc}z.pgrb2.1p00.f${FHR3}
   input_type="grib2"
-  base_install_dir="${HOMEhafs}/sorc/hafs_utils.fd"
+  varmap_file="${HOMEhafs}/sorc/hafs_utils.fd/parm/varmap_tables/FV3GFSphys_var_map.txt"
+  fixed_files_dir_input_grid="${HOMEhafs}/sorc/hafs_utils.fd/fix/fix_chgres"
   tracers='"sphum","liq_wat","o3mr"'
   tracers_input='"spfh","clwmr","o3mr"'
 else
@@ -144,11 +150,12 @@ done
 if [ $input_type = "grib2" ]; then
   if [ $bctype = gfsgrib2ab_0p25 ]; then
     # Use both ${CDUMP}.t${cyc}z.pgrb2.0p25.f${FHR3} and ${CDUMP}.t${cyc}z.pgrb2b.0p25.f${FHR3} files
-    cat ${INIDIR}/${CDUMP}.t${cyc}z.pgrb2.0p25.f${FHR3} ${INIDIR}/${CDUMP}.t${cyc}z.pgrb2b.0p25.f${FHR3} > ./${grib2_file_input_grid}
-    ${WGRIB2} ${grib2_file_input_grid} -inv ./chgres.inv
+    cat ${INIDIR}/${CDUMP}.t${cyc}z.pgrb2.0p25.f${FHR3} ${INIDIR}/${CDUMP}.t${cyc}z.pgrb2b.0p25.f${FHR3} > ./${grib2_file_input_grid}_tmp
+    ${WGRIB2} ${grib2_file_input_grid}_tmp -submsg 1 | ${USHhafs}/hafs_grib2_unique.pl | ${WGRIB2} -i ./${grib2_file_input_grid}_tmp -GRIB ./${grib2_file_input_grid}
+    #${WGRIB2} ${grib2_file_input_grid} -inv ./chgres.inv
   else
     ln -sf ${INIDIR}/${grib2_file_input_grid} ./
-    ${WGRIB2} ${grib2_file_input_grid} -inv ./chgres.inv
+    #${WGRIB2} ${grib2_file_input_grid} -inv ./chgres.inv
   fi
   INPDIR="./"
 else
@@ -207,7 +214,8 @@ cat>./fort.41<<EOF
  atm_files_input_grid="${atm_files_input_grid}"
  sfc_files_input_grid="${sfc_files_input_grid}"
  grib2_file_input_grid="${grib2_file_input_grid}"
- base_install_dir="${base_install_dir}"
+ varmap_file="${varmap_file}"
+ fixed_files_dir_input_grid="${fixed_files_dir_input_grid}"
  cycle_mon=$month
  cycle_day=$day
  cycle_hour=$hour
