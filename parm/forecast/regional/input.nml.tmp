@@ -17,6 +17,7 @@
      fhout = 3
      fhmaxhf = 0
      fhouthf = 3
+     ccpp_suite = '_ccpp_suite_'
 /
 
 &diag_manager_nml
