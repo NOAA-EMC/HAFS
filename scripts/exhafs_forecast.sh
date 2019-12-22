@@ -223,7 +223,7 @@ ccpp_suite_regional_xml="${HOMEhafs}/sorc/hafs_forecast.fd/FV3/ccpp/suites/suite
 cp ${ccpp_suite_regional_xml} .
 
 sed -e "s/_fhmax_/${NHRS}/g" \
-    -e "s/_ccpp_suite_/${ccpp_suite}/g" \
+    -e "s/_ccpp_suite_/${ccpp_suite_regional}/g" \
     -e "s/_layoutx_/${layoutx}/g" \
     -e "s/_layouty_/${layouty}/g" \
     -e "s/_npx_/${npx}/g" \
