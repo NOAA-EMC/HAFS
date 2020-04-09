@@ -2,35 +2,32 @@
 set -x
 date
 
-cd /gpfs/hps3/emc/hwrf/noscrub/${USER}/save/HAFS/rocoto
+ROCOTOhafs=$(pwd)
+cd ${ROCOTOhafs}
+EXPT=$(basename $(dirname ${ROCOTOhafs}))
 
+# Platform
 #dev="-f"
-dev="-s sites/wcoss_cray.ent -f"
+#dev="-s sites/wcoss_dell_p3.ent -f"
+#dev="-s sites/wcoss_cray.ent -f"
+#dev="-s sites/jet.ent -f"
+dev="-s sites/hera.ent -f"
 
-# Run a storm by using relocatable regional standalone domain configuration
-# The 7th tile for the regional domain (2560x2160) sits at the center of the 6th tile.
-# Domain center and output grids are automatically determined
-# Real storm
-#./run_hafs.py ${dev} 2018 06L HISTORY # Florence
-#./run_hafs.py ${dev} 2018083018-2018083100 06L HISTORY config.EXPT=HAFS config.SUBEXPT=HAFS # Florence
+#===============================================================================
+# Here are some simple examples, more examples can be seen in cronjob_hafs_rt.sh
 
-# Fake storm (e.g., NATL00L)
-# Run a real-time experiment (fakestorm, e.g., NATL00L) with the regional standalone domain configuration (using the default domain size configuration)
-#./run_hafs.py -t ${dev} 2019042000 00L HISTORY config.EXPT=HAFS config.SUBEXPT=HAFS_NATL00L ../parm/hafs_fakestorm.conf # real-time static NATL domain
+# Run all cycles of a storm
+#./run_hafs.py ${dev} 2019 05L HISTORY config.EXPT=${EXPT}# Dorian
 
-# Another example
-#./run_hafs.py -t ${dev} 2019042200 00L HISTORY \
-#    config.EXPT=HAFS config.SUBEXPT=HAFS_regional \
-#    config.scrub_work=no config.scrub_com=no \
-#    dir.CDSCRUB=/gpfs/hps2/ptmp/{ENV[USER]} \
-#    ../parm/hafs_fakestorm.conf
+# Run specified cycles of a storm
+#./run_hafs.py ${dev} 2018083018-2018083100 06L HISTORY \
+#   config.EXPT=${EXPT} config.SUBEXPT=${EXPT}_try1 # Florence
 
-# Run a storm by using HAFSv0.0A regional standalone domain and output configurations
-# The static regional domain (2880x1920) is slightly offcenter of the 6th tile.  
-# Real storm
-#./run_hafs.py ${dev} 2018083018-2018083100 06L ../parm/hafs_regional_static.conf
-# Fake storm (e.g., NATL00L)
-#./run_hafs.py -t ${dev} 2019042000 00L HISTORY ../parm/hafs_regional_static.conf
+# Run one cycle of a storm
+ ./run_hafs.py -t ${dev} 2019091600 09L HISTORY config.EXPT=${EXPT}
+
+#===============================================================================
 
 date
+
 echo 'cronjob done'
