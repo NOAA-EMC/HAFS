@@ -20,5 +20,5 @@
 	branch = support/HAFS
 [submodule "NCEPLIBS-pyprodutil"]
 	path = ush/produtil_repo
-	url = https://github.com/hafs-community/NCEPLIBS-pyprodutil
+	url = https://github.com/hafs-community/NCEPLIBS-pyprodutil.git
 	branch = feature/hafspy3
