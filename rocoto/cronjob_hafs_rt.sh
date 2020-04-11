@@ -14,7 +14,7 @@ date
 
 # NOAA RDHPCS Jet
 #HOMEhafs=/mnt/lfs4/HFIP/hwrfv3/${USER}/HAFS
-#dev="-s sites/jet.ent -f"
+#dev="-s sites/xjet.ent -f"
 #PYTHON3=/apps/intel/intelpython3/bin/python3
 
 # NOAA RDHPCS Hera
