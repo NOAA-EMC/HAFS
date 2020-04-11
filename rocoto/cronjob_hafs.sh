@@ -2,16 +2,29 @@
 set -x
 date
 
-ROCOTOhafs=$(pwd)
-cd ${ROCOTOhafs}
-EXPT=$(basename $(dirname ${ROCOTOhafs}))
-
-# Platform
-#dev="-f"
+# NOAA WCOSS Dell Phase3
+#HOMEhafs=/gpfs/dell2/emc/modeling/noscrub/${USER}/save/HAFS
 #dev="-s sites/wcoss_dell_p3.ent -f"
+#PYTHON3=/usrx/local/prod/packages/python/3.6.3/bin/python3
+
+# NOAA WCOSS Cray
+#HOMEhafs=/gpfs/hps3/emc/hwrf/noscrub/${USER}/save/HAFS
 #dev="-s sites/wcoss_cray.ent -f"
+#PYTHON3=/opt/intel/intelpython3/bin/python3
+
+# NOAA RDHPCS Jet
+#HOMEhafs=/mnt/lfs4/HFIP/hwrfv3/${USER}/HAFS
 #dev="-s sites/jet.ent -f"
-dev="-s sites/hera.ent -f"
+#PYTHON3=/apps/intel/intelpython3/bin/python3
+
+# NOAA RDHPCS Hera
+ HOMEhafs=/scratch1/NCEPDEV/hwrf/save/${USER}/save/HAFS
+ dev="-s sites/hera.ent -f"
+ PYTHON3=/apps/intel/intelpython3/bin/python3
+
+cd ${HOMEhafs}/rocoto
+
+EXPT=$(basename ${HOMEhafs})
 
 #===============================================================================
 # Here are some simple examples, more examples can be seen in cronjob_hafs_rt.sh
