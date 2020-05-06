@@ -34,9 +34,9 @@ elif [ $target = hera ]; then
     export F90=ifort
     export CC=icc
 
-elif [ $target = theia ]; then
+elif [ $target = orion ]; then
 
-    targetx=theia
+    targetx=orion
     #source ../modulefiles/modulefile.vortextracker.$target > /dev/null 2>&1
     module use ../modulefiles
     module load modulefile.vortextracker.$target
