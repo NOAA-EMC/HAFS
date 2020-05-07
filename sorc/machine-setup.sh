@@ -50,7 +50,7 @@ elif [[ -d /work/noaa ]] ; then
     module purge
     module load contrib noaatools
     module use /apps/contrib/NCEPLIBS/orion/modulefiles
-    module use /apps/contrib/NCEPLIBS/lib/modulefiles
+    MOD_PATH=/apps/contrib/NCEPLIBS/orion/modulefiles
 elif [[ -d /gpfs/hps && -e /etc/SuSE-release ]] ; then
     # We are on NOAA Luna or Surge
     if ( ! eval module help > /dev/null 2>&1 ) ; then

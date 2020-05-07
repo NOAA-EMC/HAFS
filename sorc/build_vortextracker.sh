@@ -106,7 +106,8 @@ fi
  export NETCDF_LDFLAGS="-L${NETCDF}/lib -lnetcdff -lnetcdf"
 
 export HDF5_INCLUDE=${HDF5_INCLUDE:-"-I${HDF5}/include"}
-export HDF5_LDFLAGS=${HDF5_LDFLAGS:-"-L${HDF5}/lib -lhdf5_hl -lhdf5hl_fortran -lhdf5 -lhdf5_fortran"}
+#export HDF5_LDFLAGS=${HDF5_LDFLAGS:-"-L${HDF5}/lib -lhdf5_hl -lhdf5hl_fortran -lhdf5 -lhdf5_fortran"}
+export HDF5_LDFLAGS=${HDF5_LDFLAGS:-"-L${HDF5}/lib -lhdf5_hl -lhdf5"}
 
 export INC="-I${W3EMC_INCd} -I${G2_INCd} -I${SIGIO_INC4}"
 export LIBS="${W3EMC_LIBd} ${W3NCO_LIBd} ${BACIO_LIB4} ${G2_LIBd} ${PNG_LIB} ${JASPER_LIB} ${Z_LIB}"
