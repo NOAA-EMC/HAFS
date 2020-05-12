@@ -80,6 +80,8 @@ elif [[ -d /work/noaa ]] ; then
     module use /apps/contrib/NCEPLIBS/lib/modulefiles
     module use /apps/contrib/NCEPLIBS/orion/modulefiles
     MOD_PATH=/apps/contrib/NCEPLIBS/orion/modulefiles
+    ulimit -s unlimited
+    #ulimit -a
 elif [[ -d /gpfs/hps && -e /etc/SuSE-release ]] ; then
     # We are on NOAA Luna or Surge
     if ( ! eval module help > /dev/null 2>&1 ) ; then
