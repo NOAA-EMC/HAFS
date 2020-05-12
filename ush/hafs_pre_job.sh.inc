@@ -75,7 +75,9 @@ elif [[ -d /work/noaa ]] ; then
     fi
     target=orion
     module purge
-    module load contrib noaatools
+    module use /apps/modulefiles/core
+    module use /apps/contrib/modulefiles
+    module use /apps/contrib/NCEPLIBS/lib/modulefiles
     module use /apps/contrib/NCEPLIBS/orion/modulefiles
     MOD_PATH=/apps/contrib/NCEPLIBS/orion/modulefiles
 elif [[ -d /gpfs/hps && -e /etc/SuSE-release ]] ; then
