@@ -2,13 +2,13 @@
 ## Module file for vortextracker
 #############################################################
 #
-setenv COREPATH /mnt/lfs3/projects/hfv3gfs/gwv/ljtjet/lib
-setenv NCEPLIBS /mnt/lfs3/projects/hfv3gfs/gwv/ljtjet/lib
-module use /mnt/lfs3/projects/hfv3gfs/gwv/ljtjet/lib/modulefiles
+setenv COREPATH /mnt/lfs3/HFIP/hfv3gfs/gwv/ljtjet/lib
+setenv NCEPLIBS /mnt/lfs3/HFIP/hfv3gfs/gwv/ljtjet/lib
+module use /mnt/lfs3/HFIP/hfv3gfs/gwv/ljtjet/lib/modulefiles
 
 #module use /home/George.Vandenberghe/t1/l1025/lib/modulefiles
-#module use /mnt/lfs3/projects/hfv3gfs/nwprod/lib/modulefiles
-#module use /mnt/lfs3/projects/hfv3gfs/gwv/ljtjet/lib/modulefiles
+#module use /mnt/lfs3/HFIP/hfv3gfs/nwprod/lib/modulefiles
+#module use /mnt/lfs3/HFIP/hfv3gfs/gwv/ljtjet/lib/modulefiles
 
 module load intel
 module load impi
