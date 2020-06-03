@@ -50,6 +50,7 @@ export RUN_ENVIR=${envir:-prod}
 if [ "$RUN_ENVIR" = prod ]; then
   #module use ${HOMEhafs}/modulefiles
   #module load modulefile.hafs.run.${machine}
+  source ${HOMEhafs}/sorc/hafs_utils.fd/modulefiles/build.${machine}
   module list
 fi
 
